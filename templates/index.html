@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to complement Tailwind */
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error-shake {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Multiplication Table Generator</h1>
+        
+        <form method="POST" class="space-y-4">
+            <div>
+                <label for="number" class="block text-sm font-medium text-gray-700">Enter a number:</label>
+                <input 
+                    type="text" 
+                    id="number" 
+                    name="number" 
+                    placeholder="e.g., 5 or 2.5" 
+                    class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    aria-describedby="number-error"
+                >
+            </div>
+            <button 
+                type="submit" 
+                class="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200"
+            >
+                Generate Table
+            </button>
+        </form>
+        
+        {% if error %}
+            <p class="mt-4 text-red-600 font-medium error-shake" id="number-error">{{ error }}</p>
+        {% endif %}
+        
+        {% if table %}
+            <h2 class="text-xl font-semibold text-center text-gray-800 mt-6">Multiplication Table for {{ number }}</h2>
+            <div class="table-container mt-4">
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-blue-100">
+                            <th class="border border-gray-300 p-3 text-left">Multiplier</th>
+                            <th class="border border-gray-300 p-3 text-left">Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for multiplier, result in table %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="border border-gray-300 p-3">{{ multiplier }}</td>
+                                <td class="border border-gray-300 p-3">{{ result }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
