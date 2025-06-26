@@ -1,5 +1,7 @@
 # Multiplication Table Generator App
 
+https://multiplication-table-app-tau.vercel.app/
+
 A simple Flask web application that generates a multiplication table for any number (integer or decimal) entered by the user. The app features a modern, responsive UI styled with Tailwind CSS and handles invalid inputs gracefully.
 
 ## Features
